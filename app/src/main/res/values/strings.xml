@@ -2,5 +2,9 @@
     <string name="app_name">FakeTwitter</string>
     <string name="username">Felhasználónév</string>
     <string name="password">Jelszó</string>
-    <string name="login">Button</string>
+    <string name="login">Bejelentkezés</string>
+    <string name="register">Regisztráció</string>
+    <string name="email">Email</string>
+    <string name="passwordConfirm">Jelszó megerősítése</string>
+    <string name="cancel">Mégse</string>
 </resources>
