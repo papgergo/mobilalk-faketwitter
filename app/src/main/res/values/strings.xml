@@ -2,5 +2,16 @@
     <string name="app_name">FakeTwitter</string>
     <string name="username">Felhasználónév</string>
     <string name="password">Jelszó</string>
-    <string name="login">Button</string>
+    <string name="login">Bejelentkezés</string>
+    <string name="register">Regisztráció</string>
+    <string name="email">Email</string>
+    <string name="passwordConfirm">Jelszó megerősítése</string>
+    <string name="cancel">Mégse</string>
+    <string name="phone">Telefonszám</string>
+    <string name="googleLogin">Bejelentkezés Google Fiókkal</string>
+    <string-array name="sex_options">
+        <item>Férfi</item>
+        <item>Nő</item>
+        <item>Egyéb</item>
+    </string-array>
 </resources>
