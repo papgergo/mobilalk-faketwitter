@@ -7,4 +7,10 @@
     <string name="email">Email</string>
     <string name="passwordConfirm">Jelszó megerősítése</string>
     <string name="cancel">Mégse</string>
+    <string name="phone">Telefonszám</string>
+    <string-array name="sex_options">
+        <item>Férfi</item>
+        <item>Nő</item>
+        <item>Egyéb</item>
+    </string-array>
 </resources>
