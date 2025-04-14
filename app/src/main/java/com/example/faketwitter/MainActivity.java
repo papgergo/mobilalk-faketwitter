@@ -15,9 +15,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
     private static final int SECRET_KEY = 98;
 
-    EditText usernameEditText;
+    EditText emailEditText;
     EditText passwordEditText;
 
     private SharedPreferences preferences;
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        usernameEditText = findViewById(R.id.editTextUsername);
+        emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
@@ -55,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
 
-        String username = usernameEditText.getText().toString();
+        String username = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
+        if (username.isEmpty() || password.isEmpty()){
+            return;
+        }
         Log.i(LOG_TAG, "Bejelentkezett: "+username + ", jelszó: "+password);
 
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("username", usernameEditText.getText().toString());
+        editor.putString("username", emailEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());
         editor.apply();
     }

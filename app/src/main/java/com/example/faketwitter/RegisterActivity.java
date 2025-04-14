@@ -94,6 +94,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String phoneNumber = phoneEditText.getText().toString();
         String selectedSex = phoneSpinner.getSelectedItem().toString();
 
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()){
+            return;
+        }
         Log.i(LOG_TAG, "Regisztrált: "+username + ", email: "+email);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
