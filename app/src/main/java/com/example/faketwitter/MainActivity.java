@@ -6,12 +6,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
@@ -22,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordEditText;
 
     private SharedPreferences preferences;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.editTextUsername);
         passwordEditText = findViewById(R.id.editTextPassword);
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     public void login(View view) {
@@ -45,6 +59,25 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
         Log.i(LOG_TAG, "Bejelentkezett: "+username + ", jelszó: "+password);
+
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d(LOG_TAG, "Login successful!");
+                    goToFrontPage();
+                } else {
+                    Log.d(LOG_TAG, "Error creating user");
+                    Toast.makeText(MainActivity.this, "Error logging in: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    public void goToFrontPage(/* user data*/){
+        Intent intent = new Intent(this, FrontPage.class);
+        startActivity(intent);
     }
 
     public void register(View view) {
@@ -57,19 +90,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(LOG_TAG, "onStart");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(LOG_TAG, "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(LOG_TAG, "onDestroy");
     }
 
     @Override
@@ -79,18 +109,16 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("username", usernameEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());
         editor.apply();
-        Log.i(LOG_TAG, "onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(LOG_TAG, "onResume");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(LOG_TAG, "onRestart");
     }
+
 }

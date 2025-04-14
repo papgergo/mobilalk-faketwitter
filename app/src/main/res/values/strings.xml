@@ -8,6 +8,7 @@
     <string name="passwordConfirm">Jelszó megerősítése</string>
     <string name="cancel">Mégse</string>
     <string name="phone">Telefonszám</string>
+    <string name="googleLogin">Bejelentkezés Google Fiókkal</string>
     <string-array name="sex_options">
         <item>Férfi</item>
         <item>Nő</item>

@@ -9,12 +9,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -29,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     Spinner phoneSpinner;
 
     private SharedPreferences preferences;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         phoneSpinner.setAdapter(adapter);
 
+        mAuth = FirebaseAuth.getInstance();
+
+
         Log.i(LOG_TAG, "onCreate");
     }
 
@@ -84,7 +95,19 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String selectedSex = phoneSpinner.getSelectedItem().toString();
 
         Log.i(LOG_TAG, "Regisztrált: "+username + ", email: "+email);
-        goToFrontPage();
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Log.d(LOG_TAG, "User created");
+                    goToFrontPage();
+                } else {
+                    Log.d(LOG_TAG, "Error creating user");
+                    Toast.makeText(RegisterActivity.this, "Error creating user: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void cancel(View view) {
@@ -101,19 +124,16 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(LOG_TAG, "onStart");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(LOG_TAG, "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(LOG_TAG, "onDestroy");
     }
 
     @Override
@@ -133,13 +153,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(LOG_TAG, "onResume");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(LOG_TAG, "onRestart");
     }
 
     @Override
