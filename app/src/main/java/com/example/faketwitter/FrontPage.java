@@ -2,6 +2,9 @@ package com.example.faketwitter;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class FrontPage extends AppCompatActivity {
     private static final String LOG_TAG = FrontPage.class.getName();
+    TextView foryouTextView;
     private FirebaseUser user;
 
     @Override
@@ -34,5 +38,8 @@ public class FrontPage extends AppCompatActivity {
             Log.d(LOG_TAG, "Unauthenticated user!");
             finish();
         }
+        foryouTextView = findViewById(R.id.fouyoutextView);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.spinning);
+        foryouTextView.startAnimation(animation);
     }
 }
