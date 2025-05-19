@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "104463854865",
+    "project_id": "androidfaketwitter",
+    "storage_bucket": "androidfaketwitter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104463854865:android:032f7e235b6eebac3b70b0",
+        "android_client_info": {
+          "package_name": "com.example.beadando"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104463854865-pgo1e7vvrqfc0hud9mm4sp12el2819rt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beadando",
+            "certificate_hash": "f1f320120807bd3864f7caca59c84a4cda64d37c"
+          }
+        },
+        {
+          "client_id": "104463854865-hlhkj70f6koi43rdq83l62qkh5icub7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZV-0niknwaqLv456_rSAvNNhFo0ZW9co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104463854865-hlhkj70f6koi43rdq83l62qkh5icub7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
